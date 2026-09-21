@@ -1,10 +1,8 @@
 pipeline {
     agent any
 
-
     environment {
-        SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_TOKEN    = credentials('sonarqube-token')
+        SONAR_TOKEN = credentials('sonarqube-token')
     }
 
     options {
@@ -33,7 +31,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('LocalSonarQube') {
-                    bat 'mvn -B sonar:sonar -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_TOKEN%'
+                    bat 'mvn -B sonar:sonar'
                 }
             }
         }
@@ -50,7 +48,7 @@ pipeline {
     post {
         always {
             junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
-            jacoco execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java', exclusionPattern: '**/*Test*'
+            archiveArtifacts artifacts: '**/target/site/jacoco/**', allowEmptyArchive: true
         }
         success {
             echo 'Build succeeded: tests passed and branch coverage is >= 80%.'
