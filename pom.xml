@@ -25,9 +25,8 @@
     <jacoco.version>0.8.12</jacoco.version>
     <jacoco.branch.coverage.minimum>0.80</jacoco.branch.coverage.minimum>
 
-    <!-- Sonar placeholders - update once real Sonar server/credentials are available -->
-    <sonar.host.url>http://SONAR_HOST_PLACEHOLDER:9000</sonar.host.url>
-    <sonar.login>SONAR_TOKEN_PLACEHOLDER</sonar.login>
+    <!-- Sonar configuration - host URL set for local SonarQube; token supplied at runtime via -Dsonar.login -->
+    <sonar.host.url>http://localhost:9000</sonar.host.url>
     <sonar.projectKey>com.example:sku-service</sonar.projectKey>
     <sonar.projectName>sku-service</sonar.projectName>
     <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>

@@ -68,8 +68,9 @@ The `Jenkinsfile` defines a declarative pipeline with these stages:
 4. **SonarQube Analysis** – runs `sonar:sonar`, pushing the JaCoCo XML report for coverage visibility in SonarQube.
 5. **Quality Gate** – waits on the SonarQube Quality Gate result and aborts the pipeline on failure.
 
-> **Note:** SonarQube host URL and auth token in the `Jenkinsfile`/`pom.xml` are placeholders
-> (`SONAR_HOST_PLACEHOLDER`, `SONAR_TOKEN_PLACEHOLDER`). Update the Jenkins credential ID,
-> the `withSonarQubeEnv` server name (`SonarQubeServer`), and Maven/JDK tool names
-> (`Maven3`, `JDK17`) to match your local Jenkins configuration.
+> **Note:** SonarQube is configured for a local instance at `http://localhost:9000` using
+> the Jenkins credential ID `sonarqube-token` (Secret Text). Ensure Jenkins has a
+> SonarQube server named `SonarQubeServer` configured under
+> *Manage Jenkins → System → SonarQube servers*, and that Maven/JDK tool names
+> (`Maven3`, `JDK17`) match your local Jenkins Global Tool Configuration.
 
