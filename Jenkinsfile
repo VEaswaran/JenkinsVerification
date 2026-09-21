@@ -30,8 +30,13 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('LocalSonarQube') {
-                    bat 'mvn -B sonar:sonar'
+                script {
+                    def jdk21Home = tool name: 'JDK21', type: 'jdk'
+                    withEnv(["JAVA_HOME=${jdk21Home}", "PATH+JDK21=${jdk21Home}\\bin"]) {
+                        withSonarQubeEnv('LocalSonarQube') {
+                            bat 'mvn -B sonar:sonar'
+                        }
+                    }
                 }
             }
         }
