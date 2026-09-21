@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'
-        jdk 'JDK17'
-    }
 
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
